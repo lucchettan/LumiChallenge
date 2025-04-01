@@ -69,11 +69,36 @@ struct FullScreenImageView: View {
                                 .frame(maxWidth: .infinity)
                                 .padding()
                         case .failure:
-                            Image(systemName: "xmark.octagon")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100)
-                                .foregroundColor(.gray)
+                            VStack(spacing: 16) {
+                                Image(systemName: "xmark.octagon")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 100)
+                                    .foregroundColor(.gray)
+                                
+                                Text("Failed to load the image")
+                                    .foregroundColor(.white)
+                                
+                                Button(action: {
+                                    // Force AsyncImage to reload by creating a new instance
+                                    let originalURL = imageURL
+                                    withAnimation {
+                                        Task {
+                                            try? await Task.sleep(nanoseconds: 100_000_000)
+                                            URLCache.shared.removeCachedResponse(for: URLRequest(url: originalURL))
+                                            // This will trigger a re-render of AsyncImage
+                                        }
+                                    }
+                                }) {
+                                    Label("Reload", systemImage: "arrow.clockwise")
+                                        .font(.body)
+                                        .foregroundColor(.white)
+                                        .padding(.horizontal, 24)
+                                        .padding(.vertical, 10)
+                                        .background(Color.blue.opacity(0.6))
+                                        .cornerRadius(8)
+                                }
+                            }
                         @unknown default:
                             EmptyView()
                         }
@@ -94,7 +119,11 @@ struct FullScreenImageView: View {
                 }
                 .padding()
             }
+            #if os(iOS)
             .navigationBarHidden(true)
+            #else
+            .toolbar(.hidden)
+            #endif
         }
     }
 }

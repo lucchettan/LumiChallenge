@@ -41,7 +41,7 @@ struct ImageItemView: View {
                 .font(font(for: .image, level: level))
                 .italic()
                 .foregroundStyle(.secondary)
-                .frame(maxWidth:.infinity, alignment: .center)
+                .frame(maxWidth:.infinity, alignment: .leading)
         }
         .sheet(isPresented: $showImageFullscreen) {
             FullScreenImageView(title: image.title, imageURL: image.src)
