@@ -11,6 +11,8 @@ struct ItemView: View {
     let item: Item
     let level: Int
 
+    @State private var showImageFullscreen = false
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             switch item {
@@ -18,7 +20,6 @@ struct ItemView: View {
                 Text(page.title)
                     .font(font(for: .page, level: level))
                     .padding(.leading, indent(for: level))
-
                 ForEach(page.items) { subItem in
                     ItemView(item: subItem, level: level + 1)
                 }
@@ -27,60 +28,34 @@ struct ItemView: View {
                 Text(section.title)
                     .font(font(for: .section, level: level))
                     .padding(.leading, indent(for: level))
-
                 ForEach(section.items) { subItem in
                     ItemView(item: subItem, level: level + 1)
                 }
 
-            case .text(let textBlock):
-                Text(textBlock.title)
+            case .text(let text):
+                Text(text.title)
                     .font(font(for: .text, level: level))
                     .padding(.leading, indent(for: level))
 
-            case .image(let imageBlock):
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(imageBlock.title)
-                        .font(font(for: .image, level: level))
-                    AsyncImage(url: imageBlock.src) { phase in
-                        switch phase {
-                        case .empty:
-                            ProgressView()
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .scaledToFit()
-                                .frame(maxWidth: 200)
-                                .cornerRadius(8)
-                        case .failure:
-                            Image(systemName: "photo")
-                                .foregroundColor(.gray)
-                        @unknown default:
-                            EmptyView()
-                        }
-                    }
-                    .padding(.leading, indent(for: level))
-                }
+            case .image(let image):
+                ImageItemView(image: image, level: level)
             }
         }
     }
 
-    // Font scaling based on type and depth
     func font(for type: ItemType, level: Int) -> Font {
         switch type {
-        case .page:
-            return .title
-        case .section:
-            return level == 0 ? .title2 : .title3
-        case .text, .image:
-            return .body
+        case .page: return .title
+        case .section: return level == 0 ? .title2 : .title3
+        case .text, .image: return .body
         }
     }
 
-    // Indentation based on nesting level
     func indent(for level: Int) -> CGFloat {
         CGFloat(level) * 16
     }
 }
+
 
 #Preview {
     let previewItem: Item = .page(Page(
