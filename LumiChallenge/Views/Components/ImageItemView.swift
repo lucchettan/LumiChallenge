@@ -15,10 +15,6 @@ struct ImageItemView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(image.title)
-                .font(font(for: .image, level: level))
-                .padding(.leading, indent(for: level))
-
             AsyncImage(url: image.src) { phase in
                 switch phase {
                 case .empty:
@@ -30,18 +26,22 @@ struct ImageItemView: View {
                         .scaledToFit()
                         .frame(maxWidth: 200)
                         .cornerRadius(8)
-                        .padding(.leading, indent(for: level))
                         .onTapGesture {
                             showImageFullscreen = true
                         }
                 case .failure:
                     Image(systemName: "photo")
                         .foregroundColor(.gray)
-                        .padding(.leading, indent(for: level))
                 @unknown default:
                     EmptyView()
                 }
             }
+            
+            Text(image.title)
+                .font(font(for: .image, level: level))
+                .italic()
+                .foregroundStyle(.secondary)
+                .frame(maxWidth:.infinity, alignment: .center)
         }
         .sheet(isPresented: $showImageFullscreen) {
             FullScreenImageView(title: image.title, imageURL: image.src)
@@ -52,7 +52,7 @@ struct ImageItemView: View {
         switch type {
         case .page: return .title
         case .section: return level == 0 ? .title2 : .title3
-        case .text, .image: return .body
+        case .text, .image: return .footnote
         }
     }
 

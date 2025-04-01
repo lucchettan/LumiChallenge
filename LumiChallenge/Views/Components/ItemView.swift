@@ -11,48 +11,57 @@ struct ItemView: View {
     let item: Item
     let level: Int
 
-    @State private var showImageFullscreen = false
-
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 16) {
             switch item {
             case .page(let page):
-                Text(page.title)
-                    .font(font(for: .page, level: level))
-                    .padding(.leading, indent(for: level))
-                ForEach(page.items) { subItem in
-                    ItemView(item: subItem, level: level + 1)
+                VStack(alignment: .leading, spacing: 12) {
+                    Text(page.title)
+                        .font(.system(.title, design: .rounded).weight(.semibold))
+                        .foregroundColor(.primary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    ForEach(page.items) { subItem in
+                        ItemView(item: subItem, level: level + 1)
+                    }
                 }
+                .padding()
+                .background(Color.white)
+                .cornerRadius(20)
+                .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
 
             case .section(let section):
-                Text(section.title)
-                    .font(font(for: .section, level: level))
-                    .padding(.leading, indent(for: level))
-                ForEach(section.items) { subItem in
-                    ItemView(item: subItem, level: level + 1)
+                VStack(alignment: .leading, spacing: 12) {
+                    Text(section.title)
+                        .font(.system(.title3, design: .rounded).weight(.medium))
+                        .foregroundColor(.primary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    ForEach(section.items) { subItem in
+                        ItemView(item: subItem, level: level + 1)
+                    }
                 }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(lineWidth: 0.5)
+                        .foregroundStyle(Color.gray.opacity(0.2))
+                        .shadow(color: .black.opacity(0.5), radius: 18, x: 4, y: 8)
+                )
+                .cornerRadius(16)
+
 
             case .text(let text):
                 Text(text.title)
-                    .font(font(for: .text, level: level))
-                    .padding(.leading, indent(for: level))
-
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                    .padding(.bottom, 4)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             case .image(let image):
                 ImageItemView(image: image, level: level)
             }
         }
-    }
-
-    func font(for type: ItemType, level: Int) -> Font {
-        switch type {
-        case .page: return .title
-        case .section: return level == 0 ? .title2 : .title3
-        case .text, .image: return .body
-        }
-    }
-
-    func indent(for level: Int) -> CGFloat {
-        CGFloat(level) * 16
+        .frame(maxWidth: .infinity)
     }
 }
 
