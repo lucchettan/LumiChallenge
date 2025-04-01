@@ -1,20 +1,12 @@
 //
-//  Models.swift
+//  Item.swift
 //  LumiChallenge
 //
 //  Created by Nicolas Lucchetta on 01/04/2025.
 //
 
+
 import Foundation
-
-enum ItemType: String, Codable {
-    case page
-    case section
-    case text
-    case image
-}
-
-protocol DisplayableItem: Identifiable {}
 
 enum Item: Identifiable, Codable {
     case page(Page)
@@ -28,6 +20,15 @@ enum Item: Identifiable, Codable {
         case .section(let section): return section.id
         case .text(let text): return text.id
         case .image(let image): return image.id
+        }
+    }
+    
+    var type: ItemType {
+        switch self {
+        case .page: return .page
+        case .section: return .section
+        case .text: return .text
+        case .image: return .image
         }
     }
 
@@ -61,52 +62,30 @@ enum Item: Identifiable, Codable {
     }
 }
 
-struct Page: Codable, Identifiable, DisplayableItem {
-    let id = UUID()
-    let type: ItemType
-    let title: String
-    let items: [Item]
-}
-
-struct Section: Codable, Identifiable, DisplayableItem {
-    let id = UUID()
-    let type: ItemType
-    let title: String
-    let items: [Item]
-}
-
-struct TextContent: Codable, Identifiable, DisplayableItem {
-    let id = UUID()
-    let type: ItemType
-    let title: String
-}
-
-struct ImageContent: Codable, Identifiable, DisplayableItem {
-    let id = UUID()
-    let type: ItemType
-    let title: String
-    let src: URL
-}
-
 // MARK: - Page Extraction
 extension Item {
     /// Extracts all pages from the item structure, maintaining their hierarchy and content
     var pages: [Page] {
         switch self {
         case .page(let page):
-            // If this is a page, return it and recursively process its items
-            var extractedPages = [page]
+            // First, collect all nested pages
+            var nestedPages: [Page] = []
             for item in page.items {
-                extractedPages.append(contentsOf: item.pages)
+                nestedPages.append(contentsOf: item.pages)
             }
-            return extractedPages
+            
+            // Create a new page with only non-page items
+            let nonPageItems = page.items.filter { $0.type != .page }
+            let currentPage = Page(type: page.type, title: page.title, items: nonPageItems)
+            
+            // Return the current page and all nested pages
+            return [currentPage] + nestedPages
             
         case .section(let section):
-            // For sections, recursively process their items
+            // For sections, process their items to extract any nested pages
             return section.items.flatMap { $0.pages }
             
         case .text, .image:
-            // Text and image items don't contain pages
             return []
         }
     }
