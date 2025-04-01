@@ -19,7 +19,6 @@ struct ItemView: View {
                     Text(page.title)
                         .font(.system(.title, design: .rounded).weight(.semibold))
                         .foregroundColor(.primary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
 
                     ForEach(page.items) { subItem in
                         ItemView(item: subItem, level: level + 1)
@@ -35,7 +34,6 @@ struct ItemView: View {
                     Text(section.title)
                         .font(.system(.title3, design: .rounded).weight(.medium))
                         .foregroundColor(.primary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
 
                     ForEach(section.items) { subItem in
                         ItemView(item: subItem, level: level + 1)
@@ -44,9 +42,8 @@ struct ItemView: View {
                 .padding()
                 .background(
                     RoundedRectangle(cornerRadius: 16)
-                        .stroke(lineWidth: 0.5)
+                        .stroke(lineWidth: 0.75)
                         .foregroundStyle(Color.gray.opacity(0.2))
-                        .shadow(color: .black.opacity(0.5), radius: 18, x: 4, y: 8)
                 )
                 .cornerRadius(16)
 
@@ -56,12 +53,12 @@ struct ItemView: View {
                     .font(.body)
                     .foregroundColor(.secondary)
                     .padding(.bottom, 4)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+
             case .image(let image):
                 ImageItemView(image: image, level: level)
             }
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
