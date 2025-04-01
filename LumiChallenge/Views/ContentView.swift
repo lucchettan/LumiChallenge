@@ -17,12 +17,11 @@ struct ContentView: View {
                     ForEach(Array(viewModel.pages.enumerated()), id: \.element.id) { index, page in
                         ScrollView {
                             VStack(alignment: .leading, spacing: 24) {
-                                // Page content
                                 ForEach(page.items) { subItem in
                                     ItemView(item: subItem, level: 0)
                                 }
                             }
-                            .padding()
+                            .padding(.horizontal)
                         }
                         .scrollIndicators(.hidden)
                         .tag(index)
@@ -43,14 +42,16 @@ struct ContentView: View {
                     }
                 }
             }
-            .navigationTitle(viewModel.navigationTitle)
+            .animation(.easeIn)
+            .background(.white) // Workaround to ensure the view spreads to the bottom edge of the screen
             .task {
                 await viewModel.fetchContent()
             }
             .edgesIgnoringSafeArea([.bottom])
             .tabViewStyle(.page(indexDisplayMode: .always))
+            .navigationTitle(viewModel.navigationTitle)
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .edgesIgnoringSafeArea([.bottom])
     }
 }
 
