@@ -42,6 +42,7 @@ struct ContentView: View {
                     }
                 }
             }
+            .accentColor(.blue)
             .animation(.easeIn)
             .background(.white) // Workaround to ensure the view spreads to the bottom edge of the screen
             .task {

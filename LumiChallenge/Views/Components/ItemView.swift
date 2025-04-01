@@ -47,7 +47,6 @@ struct ItemView: View {
                 )
                 .cornerRadius(16)
 
-
             case .text(let text):
                 Text(text.title)
                     .font(.body)

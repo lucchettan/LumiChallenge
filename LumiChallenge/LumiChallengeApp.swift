@@ -10,6 +10,11 @@ import SwiftData
 
 @main
 struct LumiChallengeApp: App {
+    init() {
+        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.systemBlue
+        UIPageControl.appearance().pageIndicatorTintColor = UIColor.systemGray4
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
