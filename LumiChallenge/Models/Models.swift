@@ -87,3 +87,27 @@ struct ImageContent: Codable, Identifiable, DisplayableItem {
     let title: String
     let src: URL
 }
+
+// MARK: - Page Extraction
+extension Item {
+    /// Extracts all pages from the item structure, maintaining their hierarchy and content
+    var pages: [Page] {
+        switch self {
+        case .page(let page):
+            // If this is a page, return it and recursively process its items
+            var extractedPages = [page]
+            for item in page.items {
+                extractedPages.append(contentsOf: item.pages)
+            }
+            return extractedPages
+            
+        case .section(let section):
+            // For sections, recursively process their items
+            return section.items.flatMap { $0.pages }
+            
+        case .text, .image:
+            // Text and image items don't contain pages
+            return []
+        }
+    }
+}

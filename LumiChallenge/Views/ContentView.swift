@@ -20,9 +20,8 @@ struct ContentView: View {
                     .foregroundColor(.red)
                     .padding()
             } else if let rootItem = viewModel.rootItem {
-                ScrollView {
-                    ItemView(item: rootItem, level: 0)
-                }
+                PageView(item: rootItem)
+                    .ignoresSafeArea()
             } else {
                 Text("No content available.")
                     .padding()
