@@ -1,6 +1,5 @@
 # Lumi Challenge
-
-![u6738966764_httpss mj runa3XIhPlgx-Q_reinterprete_this_icon_t_1552b88c-f69c-48c3-a627-1b9244defdee_2](https://github.com/user-attachments/assets/86ff9f4e-6e44-429d-a8b5-965f6503c1e9)
+<img src="https://github.com/user-attachments/assets/86ff9f4e-6e44-429d-a8b5-965f6503c1e9" alt="Lumi Icon" width="120" />
 
 A modern iOS app built with SwiftUI that displays hierarchical content with a book-like page navigation interface.
 
