@@ -6,8 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		12CE70BD2D9C60B700A4AF1C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1236BE6B2D9BE26C008AFCD1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1236BE722D9BE26C008AFCD1;
+			remoteInfo = LumiChallenge;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		1236BE732D9BE26C008AFCD1 /* LumiChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LumiChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		12CE70B92D9C60B700A4AF1C /* LumiChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LumiChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -20,6 +31,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		1236BE702D9BE26C008AFCD1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		12CE70B62D9C60B700A4AF1C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -41,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				1236BE732D9BE26C008AFCD1 /* LumiChallenge.app */,
+				12CE70B92D9C60B700A4AF1C /* LumiChallengeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +89,26 @@
 			productReference = 1236BE732D9BE26C008AFCD1 /* LumiChallenge.app */;
 			productType = "com.apple.product-type.application";
 		};
+		12CE70B82D9C60B700A4AF1C /* LumiChallengeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 12CE70C12D9C60B700A4AF1C /* Build configuration list for PBXNativeTarget "LumiChallengeTests" */;
+			buildPhases = (
+				12CE70B52D9C60B700A4AF1C /* Sources */,
+				12CE70B62D9C60B700A4AF1C /* Frameworks */,
+				12CE70B72D9C60B700A4AF1C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				12CE70BE2D9C60B700A4AF1C /* PBXTargetDependency */,
+			);
+			name = LumiChallengeTests;
+			packageProductDependencies = (
+			);
+			productName = LumiChallengeTests;
+			productReference = 12CE70B92D9C60B700A4AF1C /* LumiChallengeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -82,6 +121,10 @@
 				TargetAttributes = {
 					1236BE722D9BE26C008AFCD1 = {
 						CreatedOnToolsVersion = 16.0;
+					};
+					12CE70B82D9C60B700A4AF1C = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 1236BE722D9BE26C008AFCD1;
 					};
 				};
 			};
@@ -100,12 +143,20 @@
 			projectRoot = "";
 			targets = (
 				1236BE722D9BE26C008AFCD1 /* LumiChallenge */,
+				12CE70B82D9C60B700A4AF1C /* LumiChallengeTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1236BE712D9BE26C008AFCD1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		12CE70B72D9C60B700A4AF1C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +173,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		12CE70B52D9C60B700A4AF1C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		12CE70BE2D9C60B700A4AF1C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1236BE722D9BE26C008AFCD1 /* LumiChallenge */;
+			targetProxy = 12CE70BD2D9C60B700A4AF1C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1236BE822D9BE26E008AFCD1 /* Debug */ = {
@@ -319,6 +385,47 @@
 			};
 			name = Release;
 		};
+		12CE70BF2D9C60B700A4AF1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QN5JJ5XQZ6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = lucchettan.LumiChallengeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LumiChallenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LumiChallenge";
+			};
+			name = Debug;
+		};
+		12CE70C02D9C60B700A4AF1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QN5JJ5XQZ6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = lucchettan.LumiChallengeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LumiChallenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LumiChallenge";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -336,6 +443,15 @@
 			buildConfigurations = (
 				1236BE852D9BE26E008AFCD1 /* Debug */,
 				1236BE862D9BE26E008AFCD1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		12CE70C12D9C60B700A4AF1C /* Build configuration list for PBXNativeTarget "LumiChallengeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12CE70BF2D9C60B700A4AF1C /* Debug */,
+				12CE70C02D9C60B700A4AF1C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
